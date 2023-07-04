@@ -1,4 +1,3 @@
-import MultiStepForm from "@/components/MultiStepForm";
 import Formulaire3 from "@/components/forms/Formulaire3";
 
 const Etape2 = () => {
