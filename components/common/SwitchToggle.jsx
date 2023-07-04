@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
 
@@ -30,11 +31,11 @@ const SwitchToggle = () => {
         </Switch>
       </div>
       <Switch.Label className='text-sm leading-6 text-gray-600'>
-        By selecting this, you agree to our{" "}
-        <a href='#' className='font-semibold text-indigo-600'>
-          privacy&nbsp;policy
+        J'ai lu et j'accepte les termes et conditions.
+        {/* <a href='#' className='font-semibold text-indigo-600'>
+          politique de confidentialité
         </a>
-        .
+        . */}
       </Switch.Label>
     </Switch.Group>
   );

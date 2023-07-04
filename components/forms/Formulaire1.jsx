@@ -5,8 +5,9 @@ import * as yup from "yup";
 import InputField from "../common/InputField";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Link from "next/link";
 
-const Formulaire1 = () => {
+const Formulaire1 = ({ nextStep }) => {
   const schema = yup.object({
     nomNaissance: yup
       .string()
@@ -118,10 +119,19 @@ const Formulaire1 = () => {
         "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
       )
       .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    preferences: yup
+      .object()
+      .test(
+        "au moins une case à cocher",
+        "Veuillez choisir au moins une option",
+        (value) => value && Object.values(value).some((v) => v)
+      )
+      .required(),
   });
 
   const onSubmit = (data) => {
     console.log(data);
+    // nextStep(data);
   };
 
   const {
@@ -168,7 +178,7 @@ const Formulaire1 = () => {
               name='nomUsage'
               register={register}
               placeholder='Dupont'
-              error={errors["nomUsage"]?.message}
+              // error={errors["nomUsage"]?.message}
             />
           </div>
           <div className=''>
@@ -269,7 +279,7 @@ const Formulaire1 = () => {
               label='E-mail'
               name='mail'
               register={register}
-              placeholder='axel.dupont@exemple.com'
+              placeholder='jean.dupont@exemple.com'
               error={errors["mail"]?.message}
             />
           </div>
@@ -295,12 +305,14 @@ const Formulaire1 = () => {
           </div>
         </div>
         <div className='mt-10'>
-          <button
-            type='submit'
-            className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-          >
-            Suivant
-          </button>
+          <Link href='/etape-2'>
+            <button
+              type='submit'
+              className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+            >
+              Suivant
+            </button>
+          </Link>
         </div>
       </form>
     </div>

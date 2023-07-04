@@ -1,7 +1,7 @@
-// import MultiStepForm from "@/components/MultiStepForm";
-import Formulaire1 from "@/components/forms/Formulaire1";
+import MultiStepForm from "@/components/MultiStepForm";
+import Formulaire3 from "@/components/forms/Formulaire3";
 
-const Etape1 = () => {
+const Etape2 = () => {
   return (
     <div className='isolate bg-white px-6 pb-24 pt-14 sm:pb-32 sm:pt-20 lg:px-8'>
       <div
@@ -29,7 +29,7 @@ const Etape1 = () => {
         <p className='mt-2 text-lg leading-8 text-slate-600'>
           Année universitaire 2022-2023
         </p>
-        <Formulaire1 />
+        <Formulaire3 />
         <div
           className='absolute inset-x-0 bottom-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:bottom-[-20rem]'
           aria-hidden='true'
@@ -47,4 +47,4 @@ const Etape1 = () => {
   );
 };
 
-export default Etape1;
+export default Etape2;
