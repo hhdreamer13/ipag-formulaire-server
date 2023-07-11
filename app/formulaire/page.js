@@ -1,6 +1,7 @@
-import Formulaire3 from "@/components/forms/Formulaire3";
+import { FormProvider } from "../../utils/FormContext";
+import FormSteps from "../../components/FormSteps";
 
-const Etape2 = () => {
+const Form = () => {
   return (
     <div className='isolate bg-white px-6 pb-24 pt-14 sm:pb-32 sm:pt-20 lg:px-8'>
       <div
@@ -28,7 +29,9 @@ const Etape2 = () => {
         <p className='mt-2 text-lg leading-8 text-slate-600'>
           Année universitaire 2022-2023
         </p>
-        <Formulaire3 />
+        <FormProvider>
+          <FormSteps />
+        </FormProvider>
         <div
           className='absolute inset-x-0 bottom-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:bottom-[-20rem]'
           aria-hidden='true'
@@ -46,4 +49,4 @@ const Etape2 = () => {
   );
 };
 
-export default Etape2;
+export default Form;

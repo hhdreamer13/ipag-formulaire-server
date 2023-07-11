@@ -10,8 +10,8 @@ const Navbar = () => {
   const navigation = [
     { name: "Vacataire", href: "#" },
     { name: "Conférencier", href: "#" },
-    { name: "Ipag de Paris", href: "#" },
-    { name: "Liens utiles", href: "#" },
+    { name: "IPAG de Paris", href: "#" },
+    { name: "FAQ", href: "#" },
   ];
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

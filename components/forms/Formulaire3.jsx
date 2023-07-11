@@ -3,17 +3,14 @@
 
 import * as yup from "yup";
 
-import InputField from "../common/InputField";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import CheckboxGroup from "../common/CheckboxGroup";
-import SwitchToggle from "../common/SwitchToggle";
 import Link from "next/link";
 import { useDropzone } from "react-dropzone";
 import Dropzone from "react-dropzone";
 import { useCallback } from "react";
 
-const Formulaire3 = ({ nextStep }) => {
+const Formulaire3 = () => {
   const schema = yup.object({
     soussigne: yup
       .string()
@@ -50,7 +47,6 @@ const Formulaire3 = ({ nextStep }) => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // nextStep(data);
   };
 
   const {

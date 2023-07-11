@@ -5,134 +5,122 @@ import * as yup from "yup";
 import InputField from "../common/InputField";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Link from "next/link";
+import { useFormState } from "@/utils/FormContext";
 
-const Formulaire1 = ({ nextStep }) => {
+const PersonalDetailsForm = () => {
+  const { onHandleNext, setFormData, formData } = useFormState();
+
   const schema = yup.object({
-    nomNaissance: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le nom ne peut pas dépasser 50 caractères"),
-    prénom: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le prénom ne peut pas dépasser 50 caractères"),
-    nomUsage: yup
-      .string()
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    situationFamille: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    dateNaissance: yup
-      .date()
-      .required("Ce champ est obligatoire")
-      .typeError("Veuillez entrer une date valide"),
-    lieuNaissance: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    securiteSocial: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^\d{15}$/,
-        "Le numéro de sécurité sociale doit comporter exactement 15 chiffres"
-      ),
-    nationalite: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    domicileFiscale: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    adressePerso: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L}\d '-]+$/u,
-        "Uniquement des lettres alphabétiques, des chiffres, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(200, "L'adresse ne peut pas dépasser 200 caractères"),
-
-    codePostal: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(/^\d+$/, "Uniquement des chiffres")
-      .max(20, "Le code postal ne peut pas dépasser 20 caractères"),
-    villePostale: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    mail: yup
-      .string()
-      .email("Adresse mail non valide")
-      .required("Ce champ est obligatoire")
-      .max(254, "L'adresse mail ne peut pas dépasser 254 caractères"),
-    tel: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\d\s-]+$/,
-        "Numéro de téléphone non valide, veuillez n'utiliser que des chiffres, des espaces et des tirets"
-      )
-      .min(7, "Le numéro de téléphone doit comporter au moins 7 chiffres")
-      .max(20, "Le numéro de téléphone doit contenir moins de 20 chiffres"),
-    diplome: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    preferences: yup
-      .object()
-      .test(
-        "au moins une case à cocher",
-        "Veuillez choisir au moins une option",
-        (value) => value && Object.values(value).some((v) => v)
-      )
-      .required(),
+    // nomNaissance: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le nom ne peut pas dépasser 50 caractères"),
+    // prénom: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le prénom ne peut pas dépasser 50 caractères"),
+    // nomUsage: yup
+    //   .string()
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // situationFamille: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // dateNaissance: yup
+    //   .date()
+    //   .required("Ce champ est obligatoire")
+    //   .typeError("Veuillez entrer une date valide"),
+    // lieuNaissance: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // securiteSocial: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^\d{15}$/,
+    //     "Le numéro de sécurité sociale doit comporter exactement 15 chiffres"
+    //   ),
+    // nationalite: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // domicileFiscale: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // adressePerso: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L}\d '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des chiffres, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(200, "L'adresse ne peut pas dépasser 200 caractères"),
+    // codePostal: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(/^\d+$/, "Uniquement des chiffres")
+    //   .max(20, "Le code postal ne peut pas dépasser 20 caractères"),
+    // villePostale: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // mail: yup
+    //   .string()
+    //   .email("Adresse mail non valide")
+    //   .required("Ce champ est obligatoire")
+    //   .max(254, "L'adresse mail ne peut pas dépasser 254 caractères"),
+    // tel: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\d\s-]+$/,
+    //     "Numéro de téléphone non valide, veuillez n'utiliser que des chiffres, des espaces et des tirets"
+    //   )
+    //   .min(7, "Le numéro de téléphone doit comporter au moins 7 chiffres")
+    //   .max(20, "Le numéro de téléphone doit contenir moins de 20 chiffres"),
+    // diplome: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
   });
-
-  const onSubmit = (data) => {
-    console.log(data);
-    // nextStep(data);
-  };
 
   const {
     register,
@@ -140,14 +128,18 @@ const Formulaire1 = ({ nextStep }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: formData,
   });
+
+  const onHandleFormSubmit = (data) => {
+    setFormData((prevFormData) => ({ ...prevFormData, ...data }));
+    onHandleNext();
+  };
 
   return (
     <div>
       <form
-        action='#'
-        method='POST'
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onHandleFormSubmit)}
         className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
       >
         <div className='grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2'>
@@ -305,18 +297,13 @@ const Formulaire1 = ({ nextStep }) => {
           </div>
         </div>
         <div className='mt-10'>
-          <Link href='/etape-2'>
-            <button
-              type='submit'
-              className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-            >
-              Suivant
-            </button>
-          </Link>
+          <button className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+            Suivant
+          </button>
         </div>
       </form>
     </div>
   );
 };
 
-export default Formulaire1;
+export default PersonalDetailsForm;

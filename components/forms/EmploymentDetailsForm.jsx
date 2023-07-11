@@ -6,48 +6,44 @@ import InputField from "../common/InputField";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckboxGroup from "../common/CheckboxGroup";
-import SwitchToggle from "../common/SwitchToggle";
-import Link from "next/link";
+import { useFormState } from "@/utils/FormContext";
 
-const Formulaire2 = ({ nextStep }) => {
+const EmploymentDetailsForm = () => {
+  const { onHandleNext, onHandleBack, setFormData, formData } = useFormState();
+
   const schema = yup.object({
-    soussigne: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    profession: yup
-      .string()
-      .required("Ce champ est obligatoire")
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    autre: yup
-      .string()
-      .matches(
-        /^[\p{L} '-]+$/u,
-        "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-      )
-      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    preferences: yup
-      .object()
-      .test(
-        "au moins une case à cocher",
-        "Veuillez choisir au moins une option",
-        (value) => value && Object.values(value).some((v) => v)
-      )
-      .required(),
+    // soussigne: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // profession: yup
+    //   .string()
+    //   .required("Ce champ est obligatoire")
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // autre: yup
+    //   .string()
+    //   .matches(
+    //     /^[\p{L} '-]+$/u,
+    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
+    //   )
+    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    // preferences: yup
+    //   .object()
+    //   .test(
+    //     "au moins une case à cocher",
+    //     "Veuillez choisir au moins une option",
+    //     (value) => value && Object.values(value).some((v) => v)
+    //   )
+    //   .required(),
   });
-
-  const onSubmit = (data) => {
-    console.log(data);
-    // nextStep(data);
-  };
 
   const {
     register,
@@ -55,14 +51,18 @@ const Formulaire2 = ({ nextStep }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: formData,
   });
+
+  const onHandleFormSubmit = (data) => {
+    setFormData((prevFormData) => ({ ...prevFormData, ...data }));
+    onHandleNext();
+  };
 
   return (
     <div>
       <form
-        action='#'
-        method='POST'
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onHandleFormSubmit)}
         className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
       >
         <div className='grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2'>
@@ -122,7 +122,7 @@ const Formulaire2 = ({ nextStep }) => {
           </div>
           <div className='sm:col-span-2'>
             <CheckboxGroup
-              label='Si vous êtes « Contractuel de la Fonction Publique » ou « Salarié du secteur privé » Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier2022 : 3.428€)'
+              label='Si vous êtes « Contractuel de la Fonction Publique » ou « Salarié du secteur privé » Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier2023 : 3.666€)'
               name='fonction'
               options={[
                 { value: "option1", label: "Oui" },
@@ -132,21 +132,22 @@ const Formulaire2 = ({ nextStep }) => {
               // error={errors.preferences?.message}
             />
           </div>
-          <SwitchToggle />
         </div>
-        <div className='mt-10'>
-          <Link href='/etape-3'>
-            <button
-              type='submit'
-              className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-            >
-              Suivant
-            </button>
-          </Link>
+        <div className='mt-14 flex'>
+          <button
+            type='button'
+            onClick={onHandleBack}
+            className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          >
+            Précédent
+          </button>
+          <button className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+            Suivant
+          </button>
         </div>
       </form>
     </div>
   );
 };
 
-export default Formulaire2;
+export default EmploymentDetailsForm;
