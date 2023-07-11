@@ -1,6 +1,7 @@
 import { FormProvider } from "../../utils/FormContext";
 import FormSteps from "../../components/FormSteps";
 import TeachingDetailsForm from "@/components/forms/TeachingDetailsForm";
+import FileUpload from "@/components/forms/FileUpload";
 
 const Form = () => {
   return (
@@ -31,7 +32,7 @@ const Form = () => {
           Année universitaire 2022-2023
         </p>
         <FormProvider>
-          <TeachingDetailsForm />
+          <FileUpload />
         </FormProvider>
         <div
           className='absolute inset-x-0 bottom-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:bottom-[-20rem]'

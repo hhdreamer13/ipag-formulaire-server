@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useFormState } from "@/utils/FormContext";
 
 const PersonalDetailsForm = () => {
-  const { onHandleNext, setFormData, formData } = useFormState();
+  const { handleNext, setFormData, formData } = useFormState();
 
   const schema = yup.object({
     // nomNaissance: yup
@@ -19,7 +19,7 @@ const PersonalDetailsForm = () => {
     //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
     //   )
     //   .max(50, "Le nom ne peut pas dépasser 50 caractères"),
-    // prénom: yup
+    // prenom: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
     //   .matches(
@@ -112,7 +112,7 @@ const PersonalDetailsForm = () => {
     //   )
     //   .min(7, "Le numéro de téléphone doit comporter au moins 7 chiffres")
     //   .max(20, "Le numéro de téléphone doit contenir moins de 20 chiffres"),
-    // diplome: yup
+    // diplomePlus: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
     //   .matches(
@@ -133,7 +133,7 @@ const PersonalDetailsForm = () => {
 
   const onHandleFormSubmit = (data) => {
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
-    onHandleNext();
+    handleNext();
   };
 
   return (
@@ -157,10 +157,10 @@ const PersonalDetailsForm = () => {
             <InputField
               type='text'
               label='Prénom'
-              name='prénom'
+              name='prenom'
               register={register}
               placeholder='Jean'
-              error={errors["prénom"]?.message}
+              error={errors["prenom"]?.message}
             />
           </div>
           <div className=''>
@@ -289,10 +289,10 @@ const PersonalDetailsForm = () => {
             <InputField
               type='text'
               label='Diplôme le plus élevé'
-              name='diplome'
+              name='diplomePlus'
               register={register}
               placeholder='Master'
-              error={errors["diplome"]?.message}
+              error={errors["diplomePlus"]?.message}
             />
           </div>
         </div>

@@ -8,17 +8,17 @@ export function FormProvider({ children }) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
 
-  const onHandleNext = () => {
+  const handleNext = () => {
     setStep((prevValue) => prevValue + 1);
   };
-  const onHandleBack = () => {
+  const handleBack = () => {
     setStep((prevValue) => prevValue - 1);
   };
 
-  console.log({ formData });
+  //   console.log({ formData });
   return (
     <FormContext.Provider
-      value={{ onHandleBack, onHandleNext, step, formData, setFormData }}
+      value={{ handleBack, handleNext, step, formData, setFormData }}
     >
       {children}
     </FormContext.Provider>

@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckboxGroup from "../common/CheckboxGroup";
 import { useFormState } from "@/utils/FormContext";
+import { pdfHandler } from "@/utils/pdfHandler";
 
 const EmploymentDetailsForm = () => {
-  const { onHandleNext, onHandleBack, setFormData, formData } = useFormState();
+  const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
     // soussigne: yup
@@ -54,15 +55,31 @@ const EmploymentDetailsForm = () => {
     defaultValues: formData,
   });
 
-  const onHandleFormSubmit = (data) => {
+  console.log(formData);
+
+  const handlePdfGenerate = async () => {
+    const pdfDoc = await pdfHandler(formData);
+    const pdfBytes = await pdfDoc.save();
+
+    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    const link = document.createElement("a");
+
+    console.log(formData);
+
+    link.href = URL.createObjectURL(blob);
+    link.download = "formulaire-conferencier-rempli.pdf";
+    link.click();
+  };
+
+  const handleFormSubmit = (data) => {
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
-    onHandleNext();
+    handlePdfGenerate();
   };
 
   return (
     <div>
       <form
-        onSubmit={handleSubmit(onHandleFormSubmit)}
+        onSubmit={handleSubmit(handleFormSubmit)}
         className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
       >
         <div className='grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2'>
@@ -91,20 +108,20 @@ const EmploymentDetailsForm = () => {
               label='En qualité de'
               name='preferences'
               options={[
-                { value: "option1", label: "Fonctionnaire" },
+                { value: "fonctionnaire", label: "Fonctionnaire" },
                 {
-                  value: "option2",
+                  value: "contractuel",
                   label: "Contractuel de la Fonction Publique",
                 },
-                { value: "option3", label: "Salarié du secteur privé" },
-                { value: "option4", label: "Retraité" },
+                { value: "salarie", label: "Salarié du secteur privé" },
+                { value: "retraite", label: "Retraité" },
                 {
-                  value: "option5",
+                  value: "independant",
                   label: "Travailleurs indépendant, profession libérale",
                 },
-                { value: "option6", label: "Auto-entrepreneur" },
-                { value: "option7", label: "Étudiant" },
-                { value: "option7", label: "Autre" },
+                { value: "entrepreneur", label: "Auto-entrepreneur" },
+                { value: "etudiant", label: "Étudiant" },
+                { value: "autreProfCheck", label: "Autre" },
               ]}
               register={register}
               error={errors.preferences?.message}
@@ -114,10 +131,10 @@ const EmploymentDetailsForm = () => {
             <InputField
               type='text'
               // label='Si autre, veuillez préciser'
-              name='autre'
+              name='autreProfTitle'
               register={register}
               placeholder='Si autre, veuillez préciser'
-              // error={errors["autre"]?.message}
+              // error={errors["autreProfTitle"]?.message}
             />
           </div>
           <div className='sm:col-span-2'>
@@ -125,8 +142,8 @@ const EmploymentDetailsForm = () => {
               label='Si vous êtes « Contractuel de la Fonction Publique » ou « Salarié du secteur privé » Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier2023 : 3.666€)'
               name='fonction'
               options={[
-                { value: "option1", label: "Oui" },
-                { value: "option2", label: "Non" },
+                { value: "remunerationOui", label: "Oui" },
+                { value: "remunerationNon", label: "Non" },
               ]}
               register={register}
               // error={errors.preferences?.message}
@@ -136,13 +153,13 @@ const EmploymentDetailsForm = () => {
         <div className='mt-14 flex'>
           <button
             type='button'
-            onClick={onHandleBack}
+            onClick={handleBack}
             className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           >
             Précédent
           </button>
           <button className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-            Suivant
+            Soumettre
           </button>
         </div>
       </form>
