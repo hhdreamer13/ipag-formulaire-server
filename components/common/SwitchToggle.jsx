@@ -31,7 +31,7 @@ const SwitchToggle = () => {
         </Switch>
       </div>
       <Switch.Label className='text-sm leading-6 text-gray-600'>
-        J'ai lu et j'accepte les termes et conditions.
+        J'accepte que mes informations soient enregistrées par l'IPAG.
         {/* <a href='#' className='font-semibold text-indigo-600'>
           politique de confidentialité
         </a>

@@ -55,25 +55,23 @@ const EmploymentDetailsForm = () => {
     defaultValues: formData,
   });
 
-  console.log(formData);
+  // const handlePdfGenerate = async () => {
+  //   const pdfDoc = await pdfHandler(formData);
+  //   const pdfBytes = await pdfDoc.save();
 
-  const handlePdfGenerate = async () => {
-    const pdfDoc = await pdfHandler(formData);
-    const pdfBytes = await pdfDoc.save();
+  //   const blob = new Blob([pdfBytes], { type: "application/pdf" });
+  //   const link = document.createElement("a");
 
-    const blob = new Blob([pdfBytes], { type: "application/pdf" });
-    const link = document.createElement("a");
+  //   console.log(formData);
 
-    console.log(formData);
-
-    link.href = URL.createObjectURL(blob);
-    link.download = "formulaire-conferencier-rempli.pdf";
-    link.click();
-  };
+  //   link.href = URL.createObjectURL(blob);
+  //   link.download = "formulaire-conferencier-rempli.pdf";
+  //   link.click();
+  // };
 
   const handleFormSubmit = (data) => {
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
-    handlePdfGenerate();
+    handleNext();
   };
 
   return (
@@ -159,7 +157,7 @@ const EmploymentDetailsForm = () => {
             Précédent
           </button>
           <button className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-            Soumettre
+            Suivant
           </button>
         </div>
       </form>

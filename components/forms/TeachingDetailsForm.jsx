@@ -40,7 +40,8 @@ const TeachingDetailsForm = () => {
               label='Service recruteur'
               name='recruteur'
               register={register}
-              placeholder='IPAG'
+              defaultValue='IPAG'
+              // placeholder='IPAG'
               error={errors["recruteur"]?.message}
             />
           </div>
@@ -50,7 +51,8 @@ const TeachingDetailsForm = () => {
               label='Gestionnaire'
               name='gestionnaire'
               register={register}
-              placeholder='Léo Angioletti'
+              defaultValue='Léo Angioletti'
+              // placeholder='Léo Angioletti'
               error={errors["gestionnaire"]?.message}
             />
           </div>
