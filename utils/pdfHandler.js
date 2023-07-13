@@ -8,10 +8,19 @@ export async function pdfHandler(formData) {
 
   const fields = Object.keys(formData);
 
+  const formatDateForPDF = (date) => {
+    const [year, month, day] = date.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
   console.log(formData);
 
   for (const key of fields) {
     if (key === "civilite") continue;
+
+    if (key.includes("date")) {
+      formData[key] = formatDateForPDF(formData[key]);
+    }
 
     // Check if the form data is an object (for checkbox fields)
     if (typeof formData[key] === "object" && formData[key] !== null) {

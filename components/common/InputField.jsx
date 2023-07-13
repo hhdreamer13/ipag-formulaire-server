@@ -1,9 +1,11 @@
 const InputField = ({
   label,
   type,
+  disabled,
   register,
   name,
   error,
+  required,
   defaultValue,
   placeholder,
   helperText,
@@ -14,6 +16,8 @@ const InputField = ({
         {label}
       </label>
       <input
+        required={required}
+        disabled={disabled}
         placeholder={placeholder}
         defaultValue={defaultValue}
         type={type}

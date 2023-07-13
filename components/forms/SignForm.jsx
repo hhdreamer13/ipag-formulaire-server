@@ -3,6 +3,7 @@ import { useFormState } from "@/utils/FormContext";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import formatDatesInData from "@/utils/formatDatesInData";
 
 import Signature from "../common/Signature";
 import InputField from "../common/InputField";
@@ -25,10 +26,8 @@ const SignForm = () => {
   });
 
   const handleFormSubmit = (data) => {
-    if (data.dateSign) {
-      const [year, month, day] = data.dateSign.split("-");
-      data.dateSign = `${day}/${month}/${year}`;
-    }
+    data = formatDatesInData(data);
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       ...data,
@@ -56,7 +55,7 @@ const SignForm = () => {
     <div>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
+        className='mx-auto mt-10 max-w-xl sm:mt-12 text-left'
       >
         <div className='grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 mt-8'>
           <div className=''>

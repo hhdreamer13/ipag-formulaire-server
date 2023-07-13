@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckboxGroup from "../common/CheckboxGroup";
 import { useFormState } from "@/utils/FormContext";
+import formatDatesInData from "@/utils/formatDatesInData";
 
 const TeachingDetailsForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
@@ -23,20 +24,14 @@ const TeachingDetailsForm = () => {
   });
 
   const handleFormSubmit = (data) => {
-    if (data.dateConference) {
-      const [year, month, day] = data.dateConference.split("-");
-      data.dateConference = `${day}/${month}/${year}`;
-    }
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
     handleNext();
   };
 
   const onHandleBack = () => {
     handleSubmit((data) => {
-      if (data.dateConference) {
-        const [year, month, day] = data.dateConference.split("-");
-        data.dateConference = `${day}/${month}/${year}`;
-      }
+      data = formatDatesInData(data);
+
       setFormData((prevFormData) => ({ ...prevFormData, ...data }));
       handleBack();
     })();
@@ -54,6 +49,7 @@ const TeachingDetailsForm = () => {
               type='text'
               label='Service recruteur'
               name='recruteur'
+              // disabled
               register={register}
               defaultValue='IPAG'
               // placeholder='IPAG'
@@ -65,6 +61,7 @@ const TeachingDetailsForm = () => {
               type='text'
               label='Gestionnaire'
               name='gestionnaire'
+              // disabled
               register={register}
               defaultValue='Léo Angioletti'
               // placeholder='Léo Angioletti'
@@ -85,6 +82,7 @@ const TeachingDetailsForm = () => {
             <InputField
               type='text'
               label='Diplôme'
+              defaultValue='Toutes formations'
               name='diplome'
               register={register}
               placeholder=''
@@ -111,31 +109,17 @@ const TeachingDetailsForm = () => {
               error={errors["dateConference"]?.message}
             />
           </div>
-          <div className='sm:col-span-2 -mb-4'>
-            <p className='block text-sm font-semibold leading-6 text-slate-900'>
-              Nombre d’heures prévisionnel pour lequel le recrutement est
-              effectué
-            </p>
-          </div>
+
           <div className=''>
             <InputField
               type='number'
-              // label='heures cours'
+              label='Nombre d’heures prévisionnel'
               name='heuresCours'
               register={register}
+              defaultValue='15'
+              // disabled
               placeholder='heures cours'
               helperText='heures cours'
-              error={errors["heures"]?.message}
-            />
-          </div>
-          <div className=''>
-            <InputField
-              type='number'
-              // label='heures TD'
-              name='heuresTd'
-              register={register}
-              placeholder='heures TD'
-              helperText='heures TD'
               error={errors["heures"]?.message}
             />
           </div>
@@ -159,15 +143,9 @@ const TeachingDetailsForm = () => {
                   label: "sciences de gestion",
                 },
                 {
-                  value: "mathematiqueInformatique",
-                  label: "mathématique et informatique",
-                },
-                {
                   value: "scienceInformation",
                   label: "sciences de l’information",
                 },
-                { value: "langues", label: "langues" },
-                { value: "sports", label: "sports" },
               ]}
               register={register}
               error={errors.preferences?.message}

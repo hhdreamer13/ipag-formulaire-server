@@ -9,97 +9,69 @@ import InputField from "../common/InputField";
 import TelephoneField from "../common/TelephoneField";
 import SocialSecurityField from "../common/SocialSecurityField";
 import SelectField from "../common/SelectField";
+import formatDatesInData from "@/utils/formatDatesInData";
 
 const PersonalDetailsForm = () => {
   const { handleNext, setFormData, formData } = useFormState();
+
+  const today = new Date();
+  const eighteenYearsAgo = new Date(
+    today.getFullYear() - 18,
+    today.getMonth(),
+    today.getDate()
+  );
+  const hundredYearsAgo = new Date(
+    today.getFullYear() - 100,
+    today.getMonth(),
+    today.getDate()
+  );
 
   const schema = yup.object({
     // nomNaissance: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le nom ne peut pas dépasser 50 caractères"),
     // prenom: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le prénom ne peut pas dépasser 50 caractères"),
     // nomUsage: yup
     //   .string()
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     // situationFamille: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     // dateNaissance: yup
     //   .date()
     //   .required("Ce champ est obligatoire")
+    //   .min(hundredYearsAgo, "Date trop ancienne")
+    //   .max(eighteenYearsAgo, "Doit être majeur")
     //   .typeError("Veuillez entrer une date valide"),
     // lieuNaissance: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // securiteSocial: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^\d{15}$/,
-    //     "Le numéro de sécurité sociale doit comporter exactement 15 chiffres"
-    //   ),
+    // securiteSocial: yup.string().required("Ce champ est obligatoire"),
     // nationalite: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     // domicileFiscale: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     // adressePerso: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L}\d '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des chiffres, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(200, "L'adresse ne peut pas dépasser 200 caractères"),
     // codePostal: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(/^\d+$/, "Uniquement des chiffres")
     //   .max(20, "Le code postal ne peut pas dépasser 20 caractères"),
     // villePostale: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     // mail: yup
     //   .string()
@@ -118,10 +90,6 @@ const PersonalDetailsForm = () => {
     // diplomePlus: yup
     //   .string()
     //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
   });
 
@@ -141,10 +109,8 @@ const PersonalDetailsForm = () => {
   });
 
   const onHandleFormSubmit = (data) => {
-    if (data.dateNaissance) {
-      const [year, month, day] = data.dateNaissance.split("-");
-      data.dateNaissance = `${day}/${month}/${year}`;
-    }
+    data = formatDatesInData(data);
+
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
     handleNext();
   };
@@ -213,6 +179,7 @@ const PersonalDetailsForm = () => {
           <div className=''>
             <InputField
               type='date'
+              // required
               label='Date de naissance'
               name='dateNaissance'
               register={register}
