@@ -66,14 +66,14 @@ const Signature = ({ setSignature }) => {
         <button
           type='button'
           onClick={handleClear}
-          className='rounded-lg bg-rose-100 px-4 py-2 mt-4 text-sm font-semibold'
+          className='rounded-lg bg-rose-100 focus:bg-rose-200 text-slate-700 hover:text-slate-500 px-4 py-2 mt-4 text-sm font-semibold'
         >
           Effacer
         </button>
         <button
           type='button'
           onClick={handleSign}
-          className='rounded-lg bg-teal-100 px-4 py-2 mt-4 text-sm font-semibold'
+          className='rounded-lg bg-teal-100 focus:bg-teal-200 text-slate-700 hover:text-slate-500 px-4 py-2 mt-4 text-sm font-semibold'
         >
           Signer
         </button>
