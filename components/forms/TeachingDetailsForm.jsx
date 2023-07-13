@@ -23,8 +23,23 @@ const TeachingDetailsForm = () => {
   });
 
   const handleFormSubmit = (data) => {
+    if (data.dateConference) {
+      const [year, month, day] = data.dateConference.split("-");
+      data.dateConference = `${day}/${month}/${year}`;
+    }
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
     handleNext();
+  };
+
+  const onHandleBack = () => {
+    handleSubmit((data) => {
+      if (data.dateConference) {
+        const [year, month, day] = data.dateConference.split("-");
+        data.dateConference = `${day}/${month}/${year}`;
+      }
+      setFormData((prevFormData) => ({ ...prevFormData, ...data }));
+      handleBack();
+    })();
   };
 
   return (
@@ -108,7 +123,7 @@ const TeachingDetailsForm = () => {
               // label='heures cours'
               name='heuresCours'
               register={register}
-              placeholder=''
+              placeholder='heures cours'
               helperText='heures cours'
               error={errors["heures"]?.message}
             />
@@ -119,7 +134,7 @@ const TeachingDetailsForm = () => {
               // label='heures TD'
               name='heuresTd'
               register={register}
-              placeholder=''
+              placeholder='heures TD'
               helperText='heures TD'
               error={errors["heures"]?.message}
             />
@@ -162,7 +177,7 @@ const TeachingDetailsForm = () => {
         <div className='mt-14 flex'>
           <button
             type='button'
-            onClick={handleBack}
+            onClick={onHandleBack}
             className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           >
             Précédent

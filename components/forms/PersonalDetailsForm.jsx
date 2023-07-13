@@ -2,10 +2,13 @@
 
 import * as yup from "yup";
 
-import InputField from "../common/InputField";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useFormState } from "@/utils/FormContext";
+import InputField from "../common/InputField";
+import TelephoneField from "../common/TelephoneField";
+import SocialSecurityField from "../common/SocialSecurityField";
+import SelectField from "../common/SelectField";
 
 const PersonalDetailsForm = () => {
   const { handleNext, setFormData, formData } = useFormState();
@@ -122,16 +125,26 @@ const PersonalDetailsForm = () => {
     //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
   });
 
+  const defaultFormData = {
+    securiteSocial: "",
+    tel: "",
+  };
+
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: formData,
+    defaultValues: { ...defaultFormData, ...formData },
   });
 
   const onHandleFormSubmit = (data) => {
+    if (data.dateNaissance) {
+      const [year, month, day] = data.dateNaissance.split("-");
+      data.dateNaissance = `${day}/${month}/${year}`;
+    }
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
     handleNext();
   };
@@ -143,6 +156,30 @@ const PersonalDetailsForm = () => {
         className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
       >
         <div className='grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2'>
+          <div className='sm:col-span-1 flex space-x-2'>
+            <div className='w-32'>
+              <SelectField
+                label='Civilité'
+                name='civilite'
+                options={[
+                  { value: "M.", label: "M." },
+                  { value: "Mme.", label: "Mme." },
+                ]}
+                register={register}
+                error={errors.civilite?.message}
+              />
+            </div>
+            <div className='flex-grow'>
+              <InputField
+                type='text'
+                label='Prénom'
+                name='prenom'
+                register={register}
+                placeholder='Jean'
+                error={errors["prenom"]?.message}
+              />
+            </div>
+          </div>
           <div>
             <InputField
               type='text'
@@ -151,16 +188,6 @@ const PersonalDetailsForm = () => {
               register={register}
               placeholder='Dupont'
               error={errors["nomNaissance"]?.message}
-            />
-          </div>
-          <div>
-            <InputField
-              type='text'
-              label='Prénom'
-              name='prenom'
-              register={register}
-              placeholder='Jean'
-              error={errors["prenom"]?.message}
             />
           </div>
           <div className=''>
@@ -204,12 +231,10 @@ const PersonalDetailsForm = () => {
             />
           </div>
           <div className='sm:col-span-2'>
-            <InputField
-              type='text'
-              label='Numéro de sécurité sociale'
+            <SocialSecurityField
               name='securiteSocial'
-              register={register}
-              placeholder='011223344556677'
+              control={control}
+              placeholder='1 94 03 75 120 005 22'
               error={errors["securiteSocial"]?.message}
             />
           </div>
@@ -232,6 +257,7 @@ const PersonalDetailsForm = () => {
               name='domicileFiscale'
               register={register}
               placeholder='France'
+              defaultValue='France'
               error={errors["domicileFiscale"]?.message}
             />
           </div>
@@ -276,12 +302,11 @@ const PersonalDetailsForm = () => {
             />
           </div>
           <div className='sm:col-span-2'>
-            <InputField
-              type='tel'
-              label='Téléphone'
+            <TelephoneField
               name='tel'
               register={register}
-              placeholder='0123456789'
+              control={control}
+              placeholder='01 23 45 67 89'
               error={errors["tel"]?.message}
             />
           </div>

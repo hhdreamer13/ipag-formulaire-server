@@ -26,7 +26,7 @@ export default function Home() {
           (Extérieurs à l’établissement)
         </p>
         <p className='mt-2 text-lg leading-8 text-slate-600'>
-          Année universitaire 2022-2023
+          Année universitaire 2023-2024
         </p>
       </div>
       <Link

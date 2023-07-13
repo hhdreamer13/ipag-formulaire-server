@@ -30,8 +30,12 @@ const SwitchToggle = () => {
           />
         </Switch>
       </div>
-      <Switch.Label className='text-sm leading-6 text-gray-600'>
-        J'accepte que mes informations soient enregistrées par l'IPAG.
+      <Switch.Label className='text-sm leading-6 text-gray-600 text-justify'>
+        J'accepte que l'IPAG de Paris recueille et utilise mes données
+        personnelles conformément au Règlement Général sur la Protection des
+        Données (RGPD). Ces données seront utilisées uniquement dans le cadre de
+        cette participation et ne seront pas partagées avec des tiers sans mon
+        consentement explicite.
         {/* <a href='#' className='font-semibold text-indigo-600'>
           politique de confidentialité
         </a>

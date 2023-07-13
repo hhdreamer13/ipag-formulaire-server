@@ -13,6 +13,7 @@ const labels = [
   { name: "villePostale", label: "Ville" },
   { name: "mail", label: "E-mail" },
   { name: "tel", label: "Téléphone" },
+  { name: "diplomePlus", label: "Diplôme le plus élevé" },
   { name: "recruteur", label: "Service recruteur" },
   { name: "gestionnaire", label: "Gestionnaire" },
   { name: "conference", label: "Intitulé de la conférence" },

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CheckboxGroup from "../common/CheckboxGroup";
 import { useFormState } from "@/utils/FormContext";
-import { pdfHandler } from "@/utils/pdfHandler";
+import RadioButtonGroup from "../common/RadioButtonGroup";
 
 const EmploymentDetailsForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
@@ -47,6 +47,7 @@ const EmploymentDetailsForm = () => {
   });
 
   const {
+    watch,
     register,
     handleSubmit,
     formState: { errors },
@@ -55,24 +56,22 @@ const EmploymentDetailsForm = () => {
     defaultValues: formData,
   });
 
-  // const handlePdfGenerate = async () => {
-  //   const pdfDoc = await pdfHandler(formData);
-  //   const pdfBytes = await pdfDoc.save();
-
-  //   const blob = new Blob([pdfBytes], { type: "application/pdf" });
-  //   const link = document.createElement("a");
-
-  //   console.log(formData);
-
-  //   link.href = URL.createObjectURL(blob);
-  //   link.download = "formulaire-conferencier-rempli.pdf";
-  //   link.click();
-  // };
-
   const handleFormSubmit = (data) => {
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
     handleNext();
   };
+
+  const onHandleBack = () => {
+    handleSubmit((data) => {
+      setFormData((prevFormData) => ({ ...prevFormData, ...data }));
+      handleBack();
+    })();
+  };
+
+  const profession = watch("qualiteRadio");
+  const civilite = watch("civilite");
+  const prenom = watch("prenom");
+  const nom = watch("nomNaissance");
 
   return (
     <div>
@@ -84,9 +83,14 @@ const EmploymentDetailsForm = () => {
           <div className=''>
             <InputField
               type='text'
-              label='Je soussigné(e) M. / Mme'
+              label={
+                civilite === "M."
+                  ? "Je soussigné Monsieur"
+                  : "Je soussignée Madame"
+              }
               name='soussigne'
               register={register}
+              defaultValue={nom && prenom ? `${prenom} ${nom}` : ""}
               placeholder='Jean Dupont'
               error={errors["soussigne"]?.message}
             />
@@ -102,56 +106,73 @@ const EmploymentDetailsForm = () => {
             />
           </div>
           <div className='sm:col-span-2'>
-            <CheckboxGroup
+            <RadioButtonGroup
               label='En qualité de'
-              name='preferences'
+              name='qualiteRadio'
               options={[
-                { value: "fonctionnaire", label: "Fonctionnaire" },
+                { value: "fonctionnaireRadio", label: "Fonctionnaire" },
                 {
-                  value: "contractuel",
+                  value: "contractuelRadio",
                   label: "Contractuel de la Fonction Publique",
                 },
-                { value: "salarie", label: "Salarié du secteur privé" },
-                { value: "retraite", label: "Retraité" },
+                { value: "salarieRadio", label: "Salarié du secteur privé" },
+                { value: "retraiteRadio", label: "Retraité" },
                 {
-                  value: "independant",
+                  value: "independantRadio",
                   label: "Travailleurs indépendant, profession libérale",
                 },
-                { value: "entrepreneur", label: "Auto-entrepreneur" },
-                { value: "etudiant", label: "Étudiant" },
-                { value: "autreProfCheck", label: "Autre" },
+                { value: "entrepreneurRadio", label: "Auto-entrepreneur" },
+                { value: "etudiantRadio", label: "Étudiant" },
+                { value: "autreProfessionRadio", label: "Autre" },
               ]}
               register={register}
               error={errors.preferences?.message}
             />
           </div>
-          <div className=''>
-            <InputField
-              type='text'
-              // label='Si autre, veuillez préciser'
-              name='autreProfTitle'
-              register={register}
-              placeholder='Si autre, veuillez préciser'
-              // error={errors["autreProfTitle"]?.message}
-            />
-          </div>
-          <div className='sm:col-span-2'>
-            <CheckboxGroup
-              label='Si vous êtes « Contractuel de la Fonction Publique » ou « Salarié du secteur privé » Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier2023 : 3.666€)'
-              name='fonction'
-              options={[
-                { value: "remunerationOui", label: "Oui" },
-                { value: "remunerationNon", label: "Non" },
-              ]}
-              register={register}
-              // error={errors.preferences?.message}
-            />
-          </div>
+          {profession === "autreProfessionRadio" && (
+            <div className=''>
+              <InputField
+                type='text'
+                name='autreProfessionTitle'
+                register={register}
+                placeholder='Veuillez préciser'
+                error={errors["autreProfessionTitle"]?.message}
+              />
+            </div>
+          )}
+          {profession === "contractuelRadio" && (
+            <div className='sm:col-span-2 text-justify'>
+              <RadioButtonGroup
+                label='Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier 2023 : 3.666€)'
+                name='remunerationContractuelRadio'
+                options={[
+                  { value: "contractuelOuiRadio", label: "Oui" },
+                  { value: "contractuelNonRadio", label: "Non" },
+                ]}
+                register={register}
+                error={errors.fonction?.message}
+              />
+            </div>
+          )}
+          {profession === "salarieRadio" && (
+            <div className='sm:col-span-2 text-justify'>
+              <RadioButtonGroup
+                label='Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier 2023 : 3.666€)'
+                name='remunerationSalarieRadio'
+                options={[
+                  { value: "salarieOuiRadio", label: "Oui" },
+                  { value: "salarieNonRadio", label: "Non" },
+                ]}
+                register={register}
+                error={errors.fonction?.message}
+              />
+            </div>
+          )}
         </div>
         <div className='mt-14 flex'>
           <button
             type='button'
-            onClick={handleBack}
+            onClick={onHandleBack}
             className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           >
             Précédent

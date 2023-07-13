@@ -1,4 +1,5 @@
 [
+  { "name": "civilite", "label": "Civilité" },
   { "name": "nomNaissance", "label": "Nom de naissance" },
   { "name": "prenom", "label": "Prénom" },
   { "name": "nomUsage", "label": "Nom d’usage / d’époux(se)" },
@@ -13,6 +14,7 @@
   { "name": "villePostale", "label": "Ville" },
   { "name": "mail", "label": "E-mail" },
   { "name": "tel", "label": "Téléphone" },
+  { "name": "diplomePlus", "label": "Diplôme le plus élevé" },
   { "name": "recruteur", "label": "Service recruteur" },
   { "name": "gestionnaire", "label": "Gestionnaire" },
   { "name": "conference", "label": "Intitulé de la conférence" },
@@ -51,32 +53,40 @@
   { "name": "soussigne", "label": "Je soussigné(e) M. / Mme" },
   { "name": "profession", "label": "Déclare exercer la profession suivante" },
   {
-    "name": "preferences",
+    "name": "qualiteRadio",
     "label": "En qualité de",
     "options": [
-      { "value": "fonctionnaire", "label": "Fonctionnaire" },
+      { "value": "fonctionnaireRadio", "label": "Fonctionnaire" },
       {
-        "value": "contractuel",
+        "value": "contractuelRadio",
         "label": "Contractuel de la Fonction Publique"
       },
-      { "value": "salarie", "label": "Salarié du secteur privé" },
+      { "value": "salarieRadio", "label": "Salarié du secteur privé" },
       { "value": "retraite", "label": "Retraité" },
       {
-        "value": "independant",
+        "value": "independantRadio",
         "label": "Travailleurs indépendant, profession libérale"
       },
-      { "value": "entrepreneur", "label": "Auto-entrepreneur" },
-      { "value": "etudiant", "label": "Étudiant" },
-      { "value": "autreProfCheck", "label": "Autre" }
+      { "value": "entrepreneurRadio", "label": "Auto-entrepreneur" },
+      { "value": "etudiantRadio", "label": "Étudiant" },
+      { "value": "autreProfessionRadio", "label": "Autre" }
     ]
   },
-  { "name": "autreProfTitle", "label": "Si autre, veuillez préciser" },
+  { "name": "autreProfessionTitle", "label": "Veuillez préciser" },
   {
-    "name": "fonction",
-    "label": "Si vous êtes « Contractuel de la Fonction Publique » ou « Salarié du secteur privé » Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier 2023 : 3.666€)",
+    "name": "remunerationContractuelRadio",
+    "label": "Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier 2023 : 3.666€)",
     "options": [
-      { "value": "remunerationOui", "label": "Oui" },
-      { "value": "remunerationNon", "label": "Non" }
+      { "value": "contractuelOuiRadio", "label": "Oui" },
+      { "value": "contractuelNonRadio", "label": "Non" }
+    ]
+  },
+  {
+    "name": "remunerationSalarieRadio",
+    "label": "Ma rémunération brute mensuelle dépasse le plafond des cotisations de la sécurité sociale (plafond au 1er janvier 2023 : 3.666€)",
+    "options": [
+      { "value": "salarieOuiRadio", "label": "Oui" },
+      { "value": "salarieNonRadio", "label": "Non" }
     ]
   },
   { "name": "lieuSign", "label": "Faite à" },
