@@ -22,7 +22,7 @@ const Navbar = () => {
         <div className='flex lg:flex-1'>
           <Link href='/' className='-m-1.5 p-1.5'>
             <Image
-              src='/ipag-text.png'
+              src='/ipag-logo.png'
               width={150}
               height={150}
               alt='logo'

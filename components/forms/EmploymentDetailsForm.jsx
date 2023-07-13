@@ -1,11 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
 import * as yup from "yup";
 
 import InputField from "../common/InputField";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import CheckboxGroup from "../common/CheckboxGroup";
 import { useFormState } from "@/utils/FormContext";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
@@ -48,6 +48,7 @@ const EmploymentDetailsForm = () => {
 
   const {
     watch,
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
@@ -72,6 +73,13 @@ const EmploymentDetailsForm = () => {
   const civilite = watch("civilite");
   const prenom = watch("prenom");
   const nom = watch("nomNaissance");
+
+  useEffect(() => {
+    // If the profession changes, clear out the 'remunerationContractuelRadio' and 'remunerationSalarieRadio' fields.
+    setValue("remunerationContractuelRadio", null);
+    setValue("remunerationSalarieRadio", null);
+    setValue("autreProfessionTitle", "");
+  }, [profession, setValue]);
 
   return (
     <div>
@@ -173,11 +181,11 @@ const EmploymentDetailsForm = () => {
           <button
             type='button'
             onClick={onHandleBack}
-            className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+            className='block w-40 mx-auto rounded-md focus:bg-indigo-500 bg-indigo-400 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400'
           >
             Précédent
           </button>
-          <button className='block w-40 mx-auto rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+          <button className='block w-40 mx-auto rounded-md focus:bg-indigo-700 bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
             Suivant
           </button>
         </div>
