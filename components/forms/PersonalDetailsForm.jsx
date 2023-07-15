@@ -27,70 +27,73 @@ const PersonalDetailsForm = () => {
   );
 
   const schema = yup.object({
-    // nomNaissance: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le nom ne peut pas dépasser 50 caractères"),
-    // prenom: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le prénom ne peut pas dépasser 50 caractères"),
-    // nomUsage: yup
-    //   .string()
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // situationFamille: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // dateNaissance: yup
-    //   .date()
-    //   .required("Ce champ est obligatoire")
-    //   .min(hundredYearsAgo, "Date trop ancienne")
-    //   .max(eighteenYearsAgo, "Doit être majeur")
-    //   .typeError("Veuillez entrer une date valide"),
-    // lieuNaissance: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // securiteSocial: yup.string().required("Ce champ est obligatoire"),
-    // nationalite: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // domicileFiscale: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // adressePerso: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(200, "L'adresse ne peut pas dépasser 200 caractères"),
-    // codePostal: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(20, "Le code postal ne peut pas dépasser 20 caractères"),
-    // villePostale: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // mail: yup
-    //   .string()
-    //   .email("Adresse mail non valide")
-    //   .required("Ce champ est obligatoire")
-    //   .max(254, "L'adresse mail ne peut pas dépasser 254 caractères"),
-    // tel: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\d\s-]+$/,
-    //     "Numéro de téléphone non valide, veuillez n'utiliser que des chiffres, des espaces et des tirets"
-    //   )
-    //   .min(7, "Le numéro de téléphone doit comporter au moins 7 chiffres")
-    //   .max(20, "Le numéro de téléphone doit contenir moins de 20 chiffres"),
-    // diplomePlus: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    nomNaissance: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le nom ne peut pas dépasser 50 caractères"),
+    prenom: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le prénom ne peut pas dépasser 50 caractères"),
+    nomUsage: yup
+      .string()
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    situationFamille: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    dateNaissance: yup
+      .date()
+      .required("Ce champ est obligatoire")
+      .min(hundredYearsAgo, "Date trop ancienne")
+      .max(eighteenYearsAgo, "Doit être majeur")
+      .typeError("Veuillez entrer une date valide"),
+    lieuNaissance: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    securiteSocial: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .matches(/^[0-9 ]{21}$/, "Doit comporter 15 chiffres"),
+    nationalite: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    domicileFiscale: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    adressePerso: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(200, "L'adresse ne peut pas dépasser 200 caractères"),
+    codePostal: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(20, "Le code postal ne peut pas dépasser 20 caractères"),
+    villePostale: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    mail: yup
+      .string()
+      .email("Adresse mail non valide")
+      .required("Ce champ est obligatoire")
+      .max(254, "L'adresse mail ne peut pas dépasser 254 caractères"),
+    tel: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .matches(
+        /^[\d\s-]+$/,
+        "Numéro de téléphone non valide, veuillez n'utiliser que des chiffres, des espaces et des tirets"
+      )
+      .min(7, "Le numéro de téléphone doit comporter au moins 7 chiffres")
+      .max(20, "Le numéro de téléphone doit contenir moins de 20 chiffres"),
+    diplomePlus: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
   });
 
   const defaultFormData = {

@@ -13,11 +13,23 @@ const SignForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const [signature, setSignature] = useState(null);
+  const [signatureError, setSignatureError] = useState(false);
 
-  const schema = yup.object({});
+  const schema = yup.object({
+    lieuSign: yup.string().required("Ce champ est obligatoire"),
+    dateSign: yup
+      .date()
+      .required("Ce champ est obligatoire")
+      .typeError("Veuillez entrer une date valide"),
+    agreed: yup
+      .bool()
+      .oneOf([true], "You must accept the regulations")
+      .required("Required"),
+  });
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -26,6 +38,11 @@ const SignForm = () => {
   });
 
   const handleFormSubmit = (data) => {
+    if (!signature) {
+      setSignatureError(true);
+      return;
+    }
+
     data = formatDatesInData(data);
 
     setFormData((prevFormData) => ({
@@ -33,15 +50,14 @@ const SignForm = () => {
       ...data,
       signature,
     }));
+
+    setSignatureError(false);
     handleNext();
   };
 
   const onHandleBack = () => {
     handleSubmit((data) => {
-      if (data.dateSign) {
-        const [year, month, day] = data.dateSign.split("-");
-        data.dateSign = `${day}/${month}/${year}`;
-      }
+      data = formatDatesInData(data);
       setFormData((prevFormData) => ({
         ...prevFormData,
         ...data,
@@ -65,7 +81,7 @@ const SignForm = () => {
               name='lieuSign'
               register={register}
               placeholder='Paris'
-              // error={errors["soussigne"]?.message}
+              error={errors["lieuSign"]?.message}
             />
           </div>
           <div className=''>
@@ -75,16 +91,28 @@ const SignForm = () => {
               name='dateSign'
               register={register}
               placeholder=''
-              // error={errors["profession"]?.message}
+              error={errors["dateSign"]?.message}
             />
           </div>
         </div>
 
-        <div className='mt-10'>
+        <div className='mt-10 flex flex-col justify-center items-center'>
           <Signature setSignature={setSignature} />
+          {signatureError && (
+            <p className='text-rose-600 text-xs mt-4'>
+              Veuillez fournir votre signature.{" "}
+            </p>
+          )}
         </div>
         <div className='mt-10'>
-          <SwitchToggle />
+          <SwitchToggle
+            control={control}
+            name='agreed'
+            label='Accepter la politique de protection des données'
+            error={errors.agreed?.message}
+            required={true}
+            helperText="J'accepte que mes données personnelles soient recueillies et utilisées par l'IPAG de Paris, conformément au Règlement Général sur la Protection des Données (RGPD). Ces informations sont transmises de manière sécurisée et sont exclusivement destinées à l'IPAG."
+          />
         </div>
         <div className='mt-14 flex'>
           <button

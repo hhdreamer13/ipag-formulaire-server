@@ -12,7 +12,27 @@ import formatDatesInData from "@/utils/formatDatesInData";
 const TeachingDetailsForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
-  const schema = yup.object({});
+  const schema = yup.object({
+    recruteur: yup.string().required("Ce champ est obligatoire"),
+    gestionnaire: yup.string().required("Ce champ est obligatoire"),
+    conference: yup.string().required("Ce champ est obligatoire"),
+    diplome: yup.string().required("Ce champ est obligatoire"),
+    responsable: yup.string().required("Ce champ est obligatoire"),
+    dateConference: yup
+      .date()
+      .required("Ce champ est obligatoire")
+      .typeError("Veuillez entrer une date valide"),
+    heuresCours: yup
+      .number()
+      .required("Ce champ est obligatoire")
+      .positive("Veuillez entrer un nombre positif")
+      .integer("Veuillez entrer un nombre entier"),
+    disciplinePreferences: yup.object().test(
+      "oneCheckboxChecked",
+      "Vous devez sélectionner au moins une option",
+      (value) => Object.values(value).some((v) => v !== false) // Checks if any checkbox is checked
+    ),
+  });
 
   const {
     register,
@@ -24,6 +44,8 @@ const TeachingDetailsForm = () => {
   });
 
   const handleFormSubmit = (data) => {
+    data = formatDatesInData(data);
+
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
     handleNext();
   };
@@ -119,7 +141,7 @@ const TeachingDetailsForm = () => {
               defaultValue='15'
               // disabled
               placeholder='heures cours'
-              helperText='heures cours'
+              helperText='Nombre d’heures prévisionnel pour lequel le recrutement est effectué'
               error={errors["heures"]?.message}
             />
           </div>
@@ -148,7 +170,7 @@ const TeachingDetailsForm = () => {
                 },
               ]}
               register={register}
-              error={errors.preferences?.message}
+              error={errors.disciplinePreferences?.message}
             />
           </div>
         </div>

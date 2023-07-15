@@ -13,42 +13,15 @@ const EmploymentDetailsForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
-    // soussigne: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // profession: yup
-    //   .string()
-    //   .required("Ce champ est obligatoire")
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // autre: yup
-    //   .string()
-    //   .matches(
-    //     /^[\p{L} '-]+$/u,
-    //     "Uniquement des lettres alphabétiques, des tirets, des apostrophes et des espaces sont autorisés"
-    //   )
-    //   .max(50, "Le texte ne peut pas dépasser 50 caractères"),
-    // preferences: yup
-    //   .object()
-    //   .test(
-    //     "au moins une case à cocher",
-    //     "Veuillez choisir au moins une option",
-    //     (value) => value && Object.values(value).some((v) => v)
-    //   )
-    //   .required(),
+    soussigne: yup.string().required("Ce champ est obligatoire"),
+    profession: yup.string().required("Ce champ est obligatoire"),
+    qualiteRadio: yup.string().required("Ce champ est obligatoire"),
   });
 
   const {
     watch,
     setValue,
+    setError,
     register,
     handleSubmit,
     formState: { errors },
@@ -58,6 +31,38 @@ const EmploymentDetailsForm = () => {
   });
 
   const handleFormSubmit = (data) => {
+    if (
+      data.qualiteRadio === "autreProfessionRadio" &&
+      !data.autreProfessionTitle
+    ) {
+      setError("autreProfessionTitle", {
+        type: "manual",
+        message: "Ce champ est obligatoire",
+      });
+      return;
+    }
+
+    if (
+      data.qualiteRadio === "contractuelRadio" &&
+      !data.remunerationContractuelRadio
+    ) {
+      setError("remunerationContractuelRadio", {
+        type: "manual",
+        message: "Ce champ est obligatoire",
+      });
+      return;
+    }
+
+    if (
+      data.qualiteRadio === "salarieRadio" &&
+      !data.remunerationSalarieRadio
+    ) {
+      setError("remunerationSalarieRadio", {
+        type: "manual",
+        message: "Ce champ est obligatoire",
+      });
+      return;
+    }
     setFormData((prevFormData) => ({ ...prevFormData, ...data }));
     handleNext();
   };
@@ -134,7 +139,7 @@ const EmploymentDetailsForm = () => {
                 { value: "autreProfessionRadio", label: "Autre" },
               ]}
               register={register}
-              error={errors.preferences?.message}
+              error={errors.qualiteRadio?.message}
             />
           </div>
           {profession === "autreProfessionRadio" && (
@@ -158,7 +163,7 @@ const EmploymentDetailsForm = () => {
                   { value: "contractuelNonRadio", label: "Non" },
                 ]}
                 register={register}
-                error={errors.fonction?.message}
+                error={errors.remunerationContractuelRadio?.message}
               />
             </div>
           )}
@@ -172,7 +177,7 @@ const EmploymentDetailsForm = () => {
                   { value: "salarieNonRadio", label: "Non" },
                 ]}
                 register={register}
-                error={errors.fonction?.message}
+                error={errors.remunerationSalarieRadio?.message}
               />
             </div>
           )}
