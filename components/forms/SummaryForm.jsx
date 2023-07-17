@@ -11,13 +11,6 @@ const SummaryForm = () => {
     return fieldLabel ? fieldLabel.label : fieldName;
   };
 
-  const filteredFormData = Object.entries(formData)
-    .filter(([key]) => labels.some((label) => label.name === key))
-    .reduce((obj, [key, value]) => {
-      obj[key] = value;
-      return obj;
-    }, {});
-
   const handleConfirm = async () => {
     const pdfDoc = await pdfHandler(formData);
     const pdfBytes = await pdfDoc.save();
