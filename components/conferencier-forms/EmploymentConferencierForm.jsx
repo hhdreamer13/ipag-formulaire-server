@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useFormState } from "@/utils/FormContext";
 import RadioButtonGroup from "../common/RadioButtonGroup";
 
-const EmploymentDetailsForm = () => {
+const EmploymentConferencierForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
@@ -186,7 +186,7 @@ const EmploymentDetailsForm = () => {
           <button
             type='button'
             onClick={onHandleBack}
-            className='block w-40 mx-auto rounded-md focus:bg-indigo-500 bg-indigo-400 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400'
+            className='block w-40 mx-auto border-2 border-indigo-50 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-indigo-500 shadow-sm hover:bg-indigo-50 focus:bg-indigo-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400'
           >
             Précédent
           </button>
@@ -199,4 +199,4 @@ const EmploymentDetailsForm = () => {
   );
 };
 
-export default EmploymentDetailsForm;
+export default EmploymentConferencierForm;

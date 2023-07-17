@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDropzone } from "react-dropzone";
 import Dropzone from "react-dropzone";
 import { useCallback } from "react";
-import { pdfHandler } from "@/utils/pdfHandler";
+import { pdfHandler } from "@/utils/pdfHandlerConferencier";
 import Signature from "../common/Signature";
 
 const FileUpload = () => {

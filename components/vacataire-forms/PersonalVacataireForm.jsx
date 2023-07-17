@@ -11,7 +11,7 @@ import SocialSecurityField from "../common/SocialSecurityField";
 import SelectField from "../common/SelectField";
 import formatDatesInData from "@/utils/formatDatesInData";
 
-const PersonalDetailsForm = () => {
+const PersonalVacataireForm = () => {
   const { handleNext, setFormData, formData } = useFormState();
 
   const today = new Date();
@@ -301,4 +301,4 @@ const PersonalDetailsForm = () => {
   );
 };
 
-export default PersonalDetailsForm;
+export default PersonalVacataireForm;

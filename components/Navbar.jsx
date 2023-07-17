@@ -8,9 +8,9 @@ import Link from "next/link";
 
 const Navbar = () => {
   const navigation = [
-    { name: "Vacataire", href: "#" },
-    { name: "Conférencier", href: "#" },
-    { name: "IPAG de Paris", href: "#" },
+    { name: "Vacataire", href: "/vacataire" },
+    { name: "Conférencier", href: "/conferencier" },
+    { name: "IPAG de Paris", href: "https://ipagdeparis.u-paris2.fr/fr" },
     { name: "FAQ", href: "#" },
   ];
 

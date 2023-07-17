@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { useFormState } from "@/utils/FormContext";
-import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useFormState } from "@/utils/FormContext";
 import formatDatesInData from "@/utils/formatDatesInData";
 
 import Signature from "../common/Signature";
 import InputField from "../common/InputField";
 import SwitchToggle from "../common/SwitchToggle";
 
-const SignForm = () => {
+const SignConferencierForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const [signature, setSignature] = useState(null);
@@ -121,7 +121,7 @@ const SignForm = () => {
           <button
             type='button'
             onClick={onHandleBack}
-            className='block w-40 mx-auto rounded-md focus:bg-indigo-500 bg-indigo-400 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400'
+            className='block w-40 mx-auto border-2 border-indigo-50 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-indigo-500 shadow-sm hover:bg-indigo-50 focus:bg-indigo-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400'
           >
             Précédent
           </button>
@@ -134,4 +134,4 @@ const SignForm = () => {
   );
 };
 
-export default SignForm;
+export default SignConferencierForm;

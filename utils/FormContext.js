@@ -1,6 +1,6 @@
 "use client";
 
-const { createContext, useState, useContext } = require("react");
+import { createContext, useState, useContext } from "react";
 
 const FormContext = createContext({});
 
@@ -15,10 +15,9 @@ export function FormProvider({ children }) {
     setStep((prevValue) => prevValue - 1);
   };
 
-  //   console.log({ formData });
   return (
     <FormContext.Provider
-      value={{ handleBack, handleNext, step, formData, setFormData }}
+      value={{ handleBack, handleNext, step, setStep, formData, setFormData }}
     >
       {children}
     </FormContext.Provider>

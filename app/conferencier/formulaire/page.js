@@ -1,9 +1,7 @@
-import { FormProvider } from "../../utils/FormContext";
-import FormSteps from "../../components/FormSteps";
-import TeachingDetailsForm from "@/components/forms/TeachingDetailsForm";
-import FileUpload from "@/components/forms/FileUpload";
+import { FormProvider } from "@/utils/FormContext";
+import ConferencierFormSteps from "@/components/conferencier-forms/ConferencierFormSteps";
 
-const Form = () => {
+export default function FormConferencier() {
   return (
     <div className='isolate bg-white px-6 pb-24 pt-14 sm:pb-32 sm:pt-20 lg:px-8'>
       <div
@@ -19,20 +17,17 @@ const Form = () => {
         />
       </div>
       <div className='mx-auto max-w-2xl text-center'>
-        <h2 className='text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl'>
-          Formulaire de recruitment
+      <h2 className='text-2xl uppercase tracking-tight text-slate-900 sm:text-3xl'>
+          Formulaire de recrutement
         </h2>
-        <h2 className='text-3xl font-bold tracking-tight mt-4 text-slate-900 sm:text-4xl'>
+        <h2 className='text-xl uppercase font-bold tracking-tight mt-4 text-slate-900 sm:text-2xl'>
           Conférencier
         </h2>
-        <p className='mt-2 leading-8 text-slate-600'>
-          (Extérieurs à l’établissement)
-        </p>
-        <p className='mt-2 text-lg leading-8 text-slate-600'>
-          Année universitaire 2022-2023
+        <p className='mt-2 uppercase leading-8 text-slate-600'>
+          Année universitaire 2023-2024
         </p>
         <FormProvider>
-          <FileUpload />
+          <ConferencierFormSteps />
         </FormProvider>
         <div
           className='absolute inset-x-0 bottom-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:bottom-[-20rem]'
@@ -49,6 +44,4 @@ const Form = () => {
       </div>
     </div>
   );
-};
-
-export default Form;
+}

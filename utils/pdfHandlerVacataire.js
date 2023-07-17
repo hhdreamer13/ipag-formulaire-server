@@ -1,7 +1,7 @@
 import { PDFDocument } from "pdf-lib";
 
-export async function pdfHandler(formData) {
-  const formUrl = "./formulaire-conferencier.pdf";
+export async function pdfHandlerVacataire(formData) {
+  const formUrl = "/formulaire-vacataire.pdf";
   const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
   const pdfDoc = await PDFDocument.load(formPdfBytes);
   const form = pdfDoc.getForm();
@@ -17,6 +17,7 @@ export async function pdfHandler(formData) {
 
   for (const key of fields) {
     if (key === "civilite") continue;
+    if (key === "employmentType") continue;
     if (key === "agreed") continue;
 
     if (key.includes("date")) {
@@ -72,6 +73,33 @@ export async function pdfHandler(formData) {
 
           const signatureImage = await pdfDoc.embedPng(signatureBytes.buffer);
           signatureField.setImage(signatureImage);
+
+          // If the user is a student or retired, copy signature to signatureEtudiantRetraite field
+          if (
+            formData.employmentType === "etudiantRadio" ||
+            formData.employmentType === "retraiteRadio"
+          ) {
+            const signatureEtudiantRetraiteField = form.getButton(
+              "signatureEtudiantRetraite"
+            );
+            if (signatureEtudiantRetraiteField)
+              signatureEtudiantRetraiteField.setImage(signatureImage);
+          }
+        }
+      } else if (key === "lieuSign" || key === "dateSign") {
+        let field = form.getTextField(key);
+        if (field) field.setText(formData[key]);
+
+        // If the user is a student or retired, copy lieuSign and dateSign to corresponding fields
+        if (
+          formData.employmentType === "etudiantRadio" ||
+          formData.employmentType === "retraiteRadio"
+        ) {
+          let fieldEtudiantRetraite = form.getTextField(
+            `${key}EtudiantRetraite`
+          );
+          if (fieldEtudiantRetraite)
+            fieldEtudiantRetraite.setText(formData[key]);
         }
       } else if (
         typeof formData[key] === "string" &&

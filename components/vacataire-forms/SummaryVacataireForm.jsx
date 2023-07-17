@@ -1,9 +1,9 @@
-import { useFormState } from "@/utils/FormContext";
-import { pdfHandler } from "@/utils/pdfHandler";
-import labels from "@/public/labels";
 import Image from "next/image";
+import { useFormState } from "@/utils/FormContext";
+import { pdfHandlerVacataire } from "@/utils/pdfHandlerVacataire";
+import labels from "@/public/labels";
 
-const SummaryForm = () => {
+const SummaryVacataireForm = () => {
   const { formData, handleBack } = useFormState();
 
   const getLabel = (fieldName) => {
@@ -12,7 +12,7 @@ const SummaryForm = () => {
   };
 
   const handleConfirm = async () => {
-    const pdfDoc = await pdfHandler(formData);
+    const pdfDoc = await pdfHandlerVacataire(formData);
     const pdfBytes = await pdfDoc.save();
 
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
@@ -77,7 +77,7 @@ const SummaryForm = () => {
         <button
           type='button'
           onClick={onHandleBack}
-          className='block w-40 mx-auto rounded-md focus:bg-indigo-500 bg-indigo-400 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400'
+          className='block w-40 mx-auto border-2 border-indigo-50 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-indigo-500 shadow-sm hover:bg-indigo-50 focus:bg-indigo-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400'
         >
           Précédent
         </button>
@@ -92,4 +92,4 @@ const SummaryForm = () => {
   );
 };
 
-export default SummaryForm;
+export default SummaryVacataireForm;

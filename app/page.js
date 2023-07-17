@@ -16,25 +16,27 @@ export default function Home() {
         />
       </div>
       <div className='mx-auto max-w-2xl text-center'>
-        <h2 className='text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl'>
+        <h2 className='text-2xl uppercase font-bold tracking-tight text-slate-900 sm:text-3xl'>
           Formulaire de recrutement
         </h2>
-        <h2 className='text-3xl font-bold tracking-tight mt-4 text-slate-900 sm:text-4xl'>
-          Conférencier
-        </h2>
-        <p className='mt-2 leading-8 text-slate-600'>
-          (Extérieurs à l’établissement)
-        </p>
-        <p className='mt-2 text-lg leading-8 text-slate-600'>
+        <p className='mt-4 uppercase leading-8 text-slate-600'>
           Année universitaire 2023-2024
         </p>
       </div>
-      <Link
-        href='/formulaire'
-        className='block w-40 focus:bg-indigo-700 rounded-md bg-indigo-600 px-3.5 py-2.5 mt-10 mx-auto text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-      >
-        Commencer
-      </Link>
+      <div className='flex gap-6 justify-center items-center'>
+        <Link
+          href='/vacataire'
+          className='block w-40 focus:bg-indigo-700 rounded-md bg-indigo-600 px-3.5 py-2.5 mt-10 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+        >
+          Vacataire
+        </Link>
+        <Link
+          href='/conferencier'
+          className='block w-40 focus:bg-indigo-700 rounded-md bg-indigo-600 px-3.5 py-2.5 mt-10 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+        >
+          Conférencier
+        </Link>
+      </div>
     </div>
   );
 }
