@@ -23,7 +23,10 @@ const SignForm = () => {
       .typeError("Veuillez entrer une date valide"),
     agreed: yup
       .bool()
-      .oneOf([true], "You must accept the regulations")
+      .oneOf(
+        [true],
+        "L'acceptation de la politique de protection des données est nécessaire"
+      )
       .required("Required"),
   });
 
@@ -111,7 +114,7 @@ const SignForm = () => {
             label='Accepter la politique de protection des données'
             error={errors.agreed?.message}
             required={true}
-            helperText="J'accepte que mes données personnelles soient recueillies et utilisées par l'IPAG de Paris, conformément au Règlement Général sur la Protection des Données (RGPD). Ces informations sont transmises de manière sécurisée et sont exclusivement destinées à l'IPAG."
+            helperText="En acceptant, vous consentez à ce que vos données personnelles soient recueillies et utilisées par l'IPAG de Paris, conformément au Règlement Général sur la Protection des Données (RGPD). Ces informations sont transmises de manière sécurisée et sont exclusivement destinées à l'IPAG."
           />
         </div>
         <div className='mt-14 flex'>

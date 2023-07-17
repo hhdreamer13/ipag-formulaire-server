@@ -22,11 +22,7 @@ const TeachingDetailsForm = () => {
       .date()
       .required("Ce champ est obligatoire")
       .typeError("Veuillez entrer une date valide"),
-    heuresCours: yup
-      .number()
-      .required("Ce champ est obligatoire")
-      .positive("Veuillez entrer un nombre positif")
-      .integer("Veuillez entrer un nombre entier"),
+    heuresCours: yup.string().required("Ce champ est obligatoire"),
     disciplinePreferences: yup.object().test(
       "oneCheckboxChecked",
       "Vous devez sélectionner au moins une option",
@@ -142,7 +138,7 @@ const TeachingDetailsForm = () => {
               // disabled
               placeholder='heures cours'
               helperText='Nombre d’heures prévisionnel pour lequel le recrutement est effectué'
-              error={errors["heures"]?.message}
+              error={errors["heuresCours"]?.message}
             />
           </div>
           <div className=''>

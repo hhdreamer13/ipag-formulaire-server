@@ -17,6 +17,7 @@ export async function pdfHandler(formData) {
 
   for (const key of fields) {
     if (key === "civilite") continue;
+    if (key === "agreed") continue;
 
     if (key.includes("date")) {
       formData[key] = formatDateForPDF(formData[key]);
