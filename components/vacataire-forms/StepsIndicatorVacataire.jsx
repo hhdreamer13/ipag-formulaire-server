@@ -17,7 +17,7 @@ const StepsIndicatorVacataire = ({ currentStep }) => {
           onClick={() => handleStepClick(index + 1)}
         >
           <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center ${
+            className={`w-8 h-8 rounded-full border border-slate-950 flex items-center justify-center ${
               currentStep === index + 1
                 ? "bg-indigo-600 text-slate-50"
                 : "bg-gray-200 text-slate-900"
