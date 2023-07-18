@@ -23,6 +23,8 @@ const SummaryConferencierForm = () => {
     link.href = URL.createObjectURL(blob);
     link.download = "formulaire-conferencier-rempli.pdf";
     link.click();
+
+    setIsConfirmed(true);
   };
 
   const onHandleBack = () => {
