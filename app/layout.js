@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 
 import { Roboto } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
-const roboto = Roboto({
+const inter = Inter({
   weight: ["400", "700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='fr'>
-      <body className={roboto.className}>
+      <body className={inter.className}>
         <main className='flex flex-col min-h-screen'>
           <div className='flex-grow bg-white pt-10 sm:pt-16'>
             <Navbar />
