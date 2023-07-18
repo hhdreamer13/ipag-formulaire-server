@@ -53,10 +53,10 @@ const Modal = ({ showModal, setShowModal }) => {
           exit='hidden'
         >
           <motion.div
-            className='relative my-0 mx-auto flex w-3/5 flex-col rounded-2xl bg-rose-50 py-16 px-5 shadow-2xl'
+            className='relative my-0 mx-auto flex w-3/5 flex-col rounded-2xl bg-amber-50 py-16 px-6 shadow-2xl'
             variants={modalAnimations}
           >
-            <div className='prose text-justify'>
+            <div className='prose text-justify mx-auto'>
               <ul className='list-disc'>
                 <li className='mb-4'>
                   <span className='font-bold'>Atteste sur l’honneur :</span>{" "}

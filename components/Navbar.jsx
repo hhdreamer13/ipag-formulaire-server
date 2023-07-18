@@ -8,17 +8,15 @@ import Link from "next/link";
 
 const Navbar = () => {
   const navigation = [
-    { name: "Vacataire", href: "/vacataire" },
-    { name: "Conférencier", href: "/conferencier" },
+    { name: "FAQ", href: "/faq" },
     { name: "IPAG de Paris", href: "https://ipagdeparis.u-paris2.fr/fr" },
-    { name: "FAQ", href: "#" },
   ];
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <>
-      <nav className='flex items-center justify-between p-6 lg:px-8 absolute inset-x-0 top-0 z-50'>
+      <nav className='flex items-center justify-between p-6 lg:px-8 absolute inset-x-0 top-0 z-50 overflow-hidden'>
         <div className='flex lg:flex-1'>
           <Link href='/' className='-m-1.5 p-1.5'>
             <Image
@@ -44,19 +42,12 @@ const Navbar = () => {
             <a
               key={item.name}
               href={item.href}
-              className='text-sm font-semibold leading-6 text-slate-900'
+              target='_blank'
+              className='text-sm font-semibold leading-6 text-slate-900 hover:text-slate-500'
             >
               {item.name}
             </a>
           ))}
-        </div>
-        <div className='hidden lg:flex lg:flex-1 lg:justify-end'>
-          <a
-            href='#'
-            className='text-sm font-semibold leading-6 text-slate-900'
-          >
-            Connexion <span aria-hidden='true'>&rarr;</span>
-          </a>
         </div>
       </nav>
       <Dialog
