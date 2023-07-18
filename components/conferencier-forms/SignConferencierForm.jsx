@@ -16,7 +16,10 @@ const SignConferencierForm = () => {
   const [signatureError, setSignatureError] = useState(false);
 
   const schema = yup.object({
-    lieuSign: yup.string().required("Ce champ est obligatoire"),
+    lieuSign: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     dateSign: yup
       .date()
       .required("Ce champ est obligatoire")

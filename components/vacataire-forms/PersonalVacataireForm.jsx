@@ -88,8 +88,8 @@ const PersonalVacataireForm = () => {
         /^[\d\s-]+$/,
         "Numéro de téléphone non valide, veuillez n'utiliser que des chiffres, des espaces et des tirets"
       )
-      .min(7, "Le numéro de téléphone doit comporter au moins 7 chiffres")
-      .max(20, "Le numéro de téléphone doit contenir moins de 20 chiffres"),
+      .min(10, "Le numéro de téléphone doit comporter au moins 10 chiffres")
+      .max(12, "Le numéro de téléphone doit contenir moins de 12 chiffres"),
     diplomePlus: yup
       .string()
       .required("Ce champ est obligatoire")

@@ -14,8 +14,14 @@ const RetraiteForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
-    nomEtudiantRetraite: yup.string().required("Ce champ est obligatoire"),
-    prenomEtudiantRetraite: yup.string().required("Ce champ est obligatoire"),
+    nomEtudiantRetraite: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    prenomEtudiantRetraite: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     nomMaritalEtudiantRetraite: yup
       .string()
       .max(50, "Le texte ne peut pas dépasser 50 caractères"),

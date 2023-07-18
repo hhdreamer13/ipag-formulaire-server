@@ -13,8 +13,14 @@ const FonctionnaireForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
-    corpsFonctionnaire: yup.string().required("Ce champ est obligatoire"),
-    adminFonctionnaire: yup.string().required("Ce champ est obligatoire"),
+    corpsFonctionnaire: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    adminFonctionnaire: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
   });
 
   const {

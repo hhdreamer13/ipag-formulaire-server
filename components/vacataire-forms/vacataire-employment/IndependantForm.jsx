@@ -17,9 +17,18 @@ const IndependantForm = () => {
 
   const schema = yup.object({
     dirigeantPreferences: yup.object(),
-    raisonIndependant: yup.string().required("Ce champ est obligatoire"),
-    siretIndependant: yup.string().required("Ce champ est obligatoire"),
-    adresseIndependant: yup.string().required("Ce champ est obligatoire"),
+    raisonIndependant: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    siretIndependant: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    adresseIndependant: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(200, "L'adresse ne peut pas dépasser 200 caractères"),
   });
 
   const {

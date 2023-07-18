@@ -19,8 +19,14 @@ const SignVacataireForm = ({ setShowModal }) => {
   const [signatureError, setSignatureError] = useState(false);
 
   const schema = yup.object({
-    soussigne: yup.string().required("Ce champ est obligatoire"),
-    lieuSign: yup.string().required("Ce champ est obligatoire"),
+    soussigne: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    lieuSign: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     dateSign: yup
       .date()
       .required("Ce champ est obligatoire")

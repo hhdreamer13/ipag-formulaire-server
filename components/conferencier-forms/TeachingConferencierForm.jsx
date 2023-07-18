@@ -13,11 +13,26 @@ const TeachingConferencierForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
-    recruteur: yup.string().required("Ce champ est obligatoire"),
-    gestionnaire: yup.string().required("Ce champ est obligatoire"),
-    conference: yup.string().required("Ce champ est obligatoire"),
-    diplome: yup.string().required("Ce champ est obligatoire"),
-    responsable: yup.string().required("Ce champ est obligatoire"),
+    recruteur: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    gestionnaire: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    conference: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    diplome: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    responsable: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     dateConference: yup
       .date()
       .required("Ce champ est obligatoire")

@@ -14,11 +14,26 @@ const TeachingVacataireForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
-    recruteur: yup.string().required("Ce champ est obligatoire"),
-    gestionnaire: yup.string().required("Ce champ est obligatoire"),
-    enseignement: yup.string().required("Ce champ est obligatoire"),
-    diplome: yup.string().required("Ce champ est obligatoire"),
-    heuresCours: yup.string().required("Ce champ est obligatoire"),
+    recruteur: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    gestionnaire: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    enseignement: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    diplome: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    heuresCours: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     periodeRadio: yup.string().required("Ce champ est obligatoire"),
     disciplinePreferences: yup.object().test(
       "oneCheckboxChecked",

@@ -13,8 +13,14 @@ const EmploymentConferencierForm = () => {
   const { handleNext, handleBack, setFormData, formData } = useFormState();
 
   const schema = yup.object({
-    soussigne: yup.string().required("Ce champ est obligatoire"),
-    profession: yup.string().required("Ce champ est obligatoire"),
+    soussigne: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
+    profession: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .max(50, "Le texte ne peut pas dépasser 50 caractères"),
     qualiteRadio: yup.string().required("Ce champ est obligatoire"),
   });
 
@@ -111,7 +117,7 @@ const EmploymentConferencierForm = () => {
           <div className=''>
             <InputField
               type='text'
-              label='Déclare exercer la profession suivante'
+              label='Exerce la profession'
               name='profession'
               register={register}
               placeholder='Maitre de conférence'
