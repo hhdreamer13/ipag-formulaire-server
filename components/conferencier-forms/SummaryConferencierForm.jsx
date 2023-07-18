@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useFormState } from "@/utils/FormContext";
-import { pdfHandlerVacataire } from "@/utils/pdfHandlerVacataire";
+import { pdfHandlerConferencier } from "@/utils/pdfHandlerConferencier";
 import labels from "@/public/labels";
 
 const SummaryConferencierForm = () => {
@@ -14,7 +14,7 @@ const SummaryConferencierForm = () => {
   };
 
   const handleConfirm = async () => {
-    const pdfDoc = await pdfHandlerVacataire(formData);
+    const pdfDoc = await pdfHandlerConferencier(formData);
     const pdfBytes = await pdfDoc.save();
 
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
