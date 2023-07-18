@@ -109,7 +109,7 @@ const TeachingVacataireForm = () => {
               label='Nombre d’heures prévisionnel'
               name='heuresCours'
               register={register}
-              defaultValue='15'
+              defaultValue=''
               // disabled
               placeholder='heures cours'
               helperText='Nombre d’heures prévisionnel pour lequel le recrutement est effectué'

@@ -3,7 +3,16 @@ import Navbar from "@/components/Navbar";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 
+import { Roboto } from "next/font/google";
+
 const inter = Inter({ subsets: ["latin"] });
+
+const roboto = Roboto({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "IPAG de Paris",
@@ -13,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='fr'>
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <main className='flex flex-col min-h-screen'>
           <div className='flex-grow bg-white pt-10 sm:pt-16'>
             <Navbar />
