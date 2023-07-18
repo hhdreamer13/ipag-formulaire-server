@@ -43,7 +43,7 @@ const Navbar = () => {
               key={item.name}
               href={item.href}
               target='_blank'
-              className='text-sm font-semibold leading-6 text-slate-900 hover:text-slate-500'
+              className='text-sm font-semibold leading-6 text-slate-900'
             >
               {item.name}
             </a>

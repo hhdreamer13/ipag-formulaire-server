@@ -38,8 +38,6 @@ const SummaryVacataireForm = () => {
           <h2>Votre PDF a été téléchargé avec succès</h2>
         </div>
       ) : (
-        // ...your existing form...
-
         <div className='prose'>
           <h3 className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'>
             Veuillez vérifier vos informations :

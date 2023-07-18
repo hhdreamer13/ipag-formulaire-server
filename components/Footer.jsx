@@ -4,8 +4,8 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer className='bg-gray-50 w-screen py-8'>
-      <div className='mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8'>
-        <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center'>
+      <div className='mx-auto max-w-screen-xl'>
+        <div className='flex flex-col sm:flex-row sm:justify-around sm:items-center gap-16'>
           <div className='flex justify-center mb-4 sm:mb-0'>
             <Image
               src='/ipag-logo.png'
