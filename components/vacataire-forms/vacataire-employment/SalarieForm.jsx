@@ -15,6 +15,7 @@ const SalarieForm = () => {
   const schema = yup.object({});
 
   const {
+    watch,
     register,
     handleSubmit,
     formState: { errors },
@@ -32,6 +33,8 @@ const SalarieForm = () => {
     handleBack();
   };
 
+  const civilite = watch("civilite");
+
   return (
     <div>
       <form
@@ -39,9 +42,16 @@ const SalarieForm = () => {
         className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
       >
         <div className='prose'>
-          <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
-            Vous êtes salarié du secteur privé
-          </h2>
+          {civilite === "M." ? (
+            <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
+              Vous êtes salarié du secteur privé
+            </h2>
+          ) : (
+            <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
+              Vous êtes salariée du secteur privé
+            </h2>
+          )}
+
           <p className='text-sm'>
             Les salariés du privé doivent justifier d’au moins 900 heures de
             travail (ou 300 heures d’enseignement) par an{" "}

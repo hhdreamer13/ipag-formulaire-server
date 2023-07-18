@@ -25,6 +25,7 @@ const RetraiteForm = () => {
   });
 
   const {
+    watch,
     register,
     handleSubmit,
     formState: { errors },
@@ -42,6 +43,8 @@ const RetraiteForm = () => {
     handleBack();
   };
 
+  const civilite = watch("civilite");
+
   return (
     <div>
       <form
@@ -49,9 +52,16 @@ const RetraiteForm = () => {
         className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
       >
         <div className='prose text-sm text-justify mb-12'>
-          <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
-            Vous êtes retraité en-dessous de la limite d'age (67 ans)
-          </h2>
+          {civilite === "M." ? (
+            <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
+              Vous êtes retraité en-dessous de la limite d'age (67 ans)
+            </h2>
+          ) : (
+            <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
+              Vous êtes retraitée en-dessous de la limite d'age (67 ans)
+            </h2>
+          )}
+
           <ul>
             Conditions :
             <li>

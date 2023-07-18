@@ -27,6 +27,7 @@ const EtudiantForm = () => {
   });
 
   const {
+    watch,
     register,
     handleSubmit,
     formState: { errors },
@@ -44,15 +45,23 @@ const EtudiantForm = () => {
     handleBack();
   };
 
+  const civilite = watch("civilite");
+
   return (
     <div>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         className='mx-auto mt-16 max-w-xl sm:mt-20 text-left'
       >
-        <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
-          Vous êtes étudiant
-        </h2>
+        {civilite === "M." ? (
+          <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
+            Vous êtes étudiant
+          </h2>
+        ) : (
+          <h2 className='text-center mb-12 font-semibold leading-6 text-slate-900 text-lg'>
+            Vous êtes étudiante
+          </h2>
+        )}
         <div className='grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2'>
           <div className=''>
             <InputField
