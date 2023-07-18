@@ -3,11 +3,11 @@ import Navbar from "@/components/Navbar";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 
-import { Manrope } from "next/font/google";
+// import { Roboto } from "next/font/google";
 
 // const inter = Inter({ subsets: ["latin"] });
 
-const manrope = Manrope({
+const inter = Inter({
   weight: ["400", "700"],
   style: ["normal"],
   subsets: ["latin"],
@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='fr'>
-      <body className={manrope.className}>
+      <body className={inter.className}>
         <main className='flex flex-col min-h-screen'>
           <div className='flex-grow bg-white pt-10 sm:pt-16'>
             <Navbar />
