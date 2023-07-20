@@ -43,10 +43,25 @@ const SignConferencierForm = () => {
     defaultValues: formData,
   });
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = async (data) => {
     if (!signature) {
       setSignatureError(true);
       return;
+    }
+
+    try {
+      const response = await fetch("/api/conferencier", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      }
+      // Redirect or show a success message after successful form submission
+    } catch (error) {
+      // Handle error
     }
 
     data = formatDatesInData(data);

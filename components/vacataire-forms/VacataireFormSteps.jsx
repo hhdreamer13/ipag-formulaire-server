@@ -45,8 +45,6 @@ const VacataireFormSteps = ({ setShowModal }) => {
     window.scrollTo(0, 0);
   }, [step]);
 
-  console.log("step", step);
-
   return (
     <div>
       <StepsIndicatorVacataire currentStep={step} />

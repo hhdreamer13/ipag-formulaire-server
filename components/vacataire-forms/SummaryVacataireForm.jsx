@@ -24,7 +24,23 @@ const SummaryVacataireForm = () => {
     link.download = "formulaire-vacataire-rempli.pdf";
     link.click();
 
-    setIsConfirmed(true);
+    // Send a POST request to your API route
+    const res = await fetch("/api/vacataire", {
+      // change '/api/route' to your actual API route
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    // Error handling
+    if (!res.ok) {
+      // Handle error
+      console.error("An error occurred while saving the data.");
+    } else {
+      setIsConfirmed(true);
+    }
   };
 
   const onHandleBack = () => {

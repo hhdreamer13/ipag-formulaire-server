@@ -2,6 +2,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { useFormState } from "@/utils/FormContext";
 import { pdfHandlerConferencier } from "@/utils/pdfHandlerConferencier";
+
+import { connectToDB } from "@/utils/database";
+import { ConferencierModel } from "@/models/ConferencierModel";
+
 import labels from "@/public/labels";
 
 const SummaryConferencierForm = () => {
@@ -24,7 +28,23 @@ const SummaryConferencierForm = () => {
     link.download = "formulaire-conferencier-rempli.pdf";
     link.click();
 
-    setIsConfirmed(true);
+    // Send a POST request to your API route
+    const res = await fetch("/api/conferencier", {
+      // change '/api/route' to your actual API route
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    // Error handling
+    if (!res.ok) {
+      // Handle error
+      console.error("An error occurred while saving the data.");
+    } else {
+      setIsConfirmed(true);
+    }
   };
 
   const onHandleBack = () => {
